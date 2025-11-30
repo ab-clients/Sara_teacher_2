@@ -11,7 +11,11 @@ export default function ThemeToggle() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
-  }, []);
+
+    if (theme === "system") {
+      setTheme("light");
+    }
+  }, [theme, setTheme]);
 
   if (!mounted) {
     return null;
@@ -25,11 +29,11 @@ export default function ThemeToggle() {
     >
       {theme === "dark" ? (
         <span aria-hidden>
-          <FaMoon />
+          <FaSun />
         </span>
       ) : (
         <span aria-hidden>
-          <FaSun />
+          <FaMoon />
         </span>
       )}
     </button>
