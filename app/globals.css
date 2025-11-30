@@ -1,26 +1,105 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Teacher-friendly palette (light/paper theme) */
+  --bg: #fffaf0; /* warm paper */
+  --fg: #102a43; /* deep ink */
+  --muted: #50697a; /* soft muted text */
+  --primary: #2a7f62; /* teal/green accent */
+  --accent: #b0894a; /* warm gold accent */
+  --paper-bg: rgba(255, 255, 250, 0.9);
+  --paper-border: rgba(16, 42, 67, 0.06);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  /* Chalkboard-inspired dark theme */
+  --bg: #071314; /* near-chalkboard */
+  --fg: #e6f7ef; /* pale chalk */
+  --muted: #94b3b0;
+  --primary: #7bd3b1; /* mint chalk */
+  --accent: #d1b280;
+  --paper-bg: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  --paper-border: rgba(255, 255, 255, 0.04);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* alternate section backgrounds (light/dark aware) */
+:root {
+  /* slightly darker alternate section background for light mode */
+  --section-alt-bg: rgba(243, 235, 222, 0.95);
+}
+
+.dark {
+  --section-alt-bg: rgba(255, 255, 255, 0.02);
+}
+
+.section-alt {
+  background-color: var(--section-alt-bg);
+}
+
+/* Footer background variables to make footer darker on light mode and lighter on dark mode */
+:root {
+  --footer-bg: rgba(16, 42, 67, 0.08); /* subtle dark strip on light paper */
+  --footer-fg: var(--fg);
+}
+
+.dark {
+  --footer-bg: rgba(255, 255, 255, 0.03); /* slightly lighter than chalkboard */
+  --footer-fg: var(--fg);
+}
+
+.site-footer {
+  background-color: var(--footer-bg);
+  color: var(--footer-fg);
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* teacher UI helpers */
+.paper {
+  background: var(--paper-bg);
+  border: 1px solid var(--paper-border);
+  border-radius: 12px;
+  padding: 1rem;
+  color: var(--fg);
+}
+
+.chalk {
+  background-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.02),
+    rgba(255, 255, 255, 0.02)
+  );
+}
+
+/* utilities to bridge CSS variables with Tailwind */
+.bg-var {
+  background-color: var(--bg);
+}
+.fg-var {
+  color: var(--fg);
+}
+
+/* simple container */
+.container {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
