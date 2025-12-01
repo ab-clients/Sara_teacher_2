@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import Button from "./Button";
 
 export default function HomeHero({
@@ -18,7 +19,7 @@ export default function HomeHero({
   return (
     <section className="my-8 py-16 section-alt ">
       <div className="container">
-        <div className="grid grid-cols-1 md:[grid-template-columns:1fr_1.4fr] gap-8 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-8 items-center">
           <div className="space-y-6">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight">
               {title}
@@ -31,8 +32,15 @@ export default function HomeHero({
               ))}
 
             <div className="flex gap-4">
-              <Button>Work with me</Button>
-              <Button variant="ghost">View CV</Button>
+              <Link href="/contact">
+                <Button className="cursor-pointer">Work with me</Button>
+              </Link>
+
+              <Link href="/cv">
+                <Button variant="ghost" className="cursor-pointer">
+                  View CV
+                </Button>
+              </Link>
             </div>
           </div>
 

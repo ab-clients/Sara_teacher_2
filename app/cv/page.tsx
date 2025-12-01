@@ -1,12 +1,7 @@
 import Image from "next/image";
-import {
-  FaCalendarAlt,
-  FaCertificate,
-  FaChalkboardTeacher,
-} from "react-icons/fa";
+import { FaDownload } from "react-icons/fa6";
 import Button from "../components/Button";
 import CvQualifications from "../components/CvQualifications";
-import { FaDownload } from "react-icons/fa6";
 
 export const metadata = {
   title: "Sara Abdelmeguid — CV",
@@ -47,7 +42,8 @@ export default function CVPage() {
                     href="/sara-abdelmeguid-resume.pdf"
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2"
+                    className="inline-flex items-center gap-2 cursor-pointer"
+                    download
                   >
                     <FaDownload aria-hidden />
                     Download PDF
