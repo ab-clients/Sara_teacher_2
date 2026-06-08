@@ -1,45 +1,49 @@
-import React from "react";
-
-export const HomeAbout = () => {
+export function HomeAbout() {
   return (
-    <section className="container py-12" id="home-about">
-      <h2 className="text-2xl font-semibold mb-3">About</h2>
-      <p className="text-(--muted) max-w-2xl leading-relaxed">
-        I&rsquo;m Sara — an English tutor with 15+ years of international
-        experience. I specialise in IGCSE and exam preparation, plus tailored
-        lessons for learners of all ages. For a full CV with experience,
-        qualifications and services, visit the{" "}
-        <a href="/cv" className="underline">
-          CV
-        </a>
-        .
-      </p>
+    <section className="section" id="about">
+      <div className="wrap">
+        <div className="eyebrow-row">
+          <span className="idx" data-reveal>01 — About</span>
+          <span className="kicker kicker--plain" data-reveal>A friendly, modern approach</span>
+        </div>
 
-      <div className="grid sm:grid-cols-3 gap-4 mt-8">
-        <div className="paper p-4 text-center">
-          <div className="font-semibold">IGCSE Specialist</div>
-          <div className="text-(--muted) mt-2">Exam technique & coursework</div>
-        </div>
-        <div className="paper p-4 text-center">
-          <div className="font-semibold">15+ Years</div>
-          <div className="text-(--muted) mt-2">Classroom & online teaching</div>
-        </div>
-        <div className="paper p-4 text-center">
-          <div className="font-semibold">Tailored Lessons</div>
-          <div className="text-(--muted) mt-2">
-            Personalised plans & feedback
+        <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "0.8fr 1.2fr", gap: "clamp(34px, 5vw, 80px)", alignItems: "start" }}>
+          <div data-reveal>
+            <h2 className="display">Fifteen years, four continents, one belief.</h2>
+          </div>
+
+          <div data-reveal data-delay="1">
+            <p className="lede">
+              I specialise in IGCSE and exam preparation, plus tailored lessons for learners of all ages — across British, American, Canadian and Australian curricula.
+            </p>
+            <p className="body-text" style={{ marginTop: "22px", maxWidth: "54ch" }}>
+              Lessons are student-centred, practical and focused on measurable progress. I combine communicative tasks with targeted feedback to build confidence and skills that last well beyond the exam hall.
+            </p>
+
+            <div style={{ marginTop: "46px", borderTop: "1px solid var(--line)" }}>
+              {[
+                { k: "IGCSE", b: "IGCSE Specialist", s: "Exam technique & coursework" },
+                { k: "15+", b: "Years Teaching", s: "Classroom & online, three countries" },
+                { k: "1:1", b: "Tailored Lessons", s: "Personalised plans & feedback" },
+              ].map(({ k, b, s }) => (
+                <div key={k} style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "clamp(20px, 4vw, 54px)", alignItems: "baseline", padding: "26px 0", borderBottom: "1px solid var(--line)" }}>
+                  <span style={{ fontFamily: "var(--serif)", fontSize: "clamp(30px, 3.4vw, 44px)", fontWeight: 500, lineHeight: 1, color: "var(--fg)" }}>{k}</span>
+                  <div>
+                    <p style={{ fontSize: "17px", color: "var(--fg)", fontWeight: 500, margin: 0 }}>{b}</p>
+                    <p style={{ fontSize: "14.5px", color: "var(--fg-faint)", margin: "4px 0 0" }}>{s}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="mt-8">
-        <h3 className="text-lg font-semibold mb-2">How I work</h3>
-        <p className="text-(--muted) max-w-2xl">
-          Lessons are student-centred, practical and focused on measurable
-          progress — I combine communicative tasks with targeted feedback to
-          build confidence and skills.
-        </p>
-      </div>
+      <style>{`
+        @media (max-width: 900px) {
+          .about-grid { grid-template-columns: 1fr !important; gap: 26px !important; }
+        }
+      `}</style>
     </section>
   );
-};
+}

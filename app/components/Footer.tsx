@@ -1,48 +1,43 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
-    <footer className="site-footer py-8 text-sm">
-      <div className="container flex flex-col md:flex-row items-center md:justify-between gap-3">
-        <div
-          style={{ color: "var(--muted)" }}
-          className="text-center md:text-left"
-        >
-          © {new Date().getFullYear()} Sara Abdelmeguid
+    <footer className="footer">
+      <div className="wrap">
+        <div className="footer__grid">
+          <div>
+            <p className="footer__big">Sara<br />Abdelmeguid</p>
+            <p className="muted" style={{ marginTop: "20px", maxWidth: "34ch", fontSize: "14.5px" }}>
+              Freelance English Tutor · IGCSE Specialist · CELTA, TEFL. Based in Australia, open to global roles.
+            </p>
+          </div>
+
+          <div className="footer__col">
+            <h4>Explore</h4>
+            <Link href="/">Home</Link>
+            <Link href="/cv">CV</Link>
+            <Link href="/portfolio">Portfolio</Link>
+            <Link href="/contact">Contact</Link>
+          </div>
+
+          <div className="footer__col">
+            <h4>Get in touch</h4>
+            <Link href="/contact">Book a lesson</Link>
+            <a href="/sara-abdelmeguid-resume.pdf" target="_blank" rel="noreferrer" download>
+              Download CV (PDF)
+            </a>
+            <p>Remote · Worldwide</p>
+          </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-center md:text-right">
-          <div className="flex gap-3 items-center">
-            <a
-              href="#"
-              className="hover:underline"
-              style={{ color: "var(--muted)" }}
-            >
-              Privacy
-            </a>
-            <a
-              href="#"
-              className="hover:underline"
-              style={{ color: "var(--muted)" }}
-            >
-              Contact
-            </a>
-          </div>
-
-          <div className="hidden md:block" style={{ color: "var(--muted)" }}>
-            •
-          </div>
-
-          <div className="flex items-center gap-2">
-            <span style={{ color: "var(--muted)" }}>Developed by</span>
-            <a
-              href="https://alybadawy.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline"
-              style={{ color: "var(--muted)" }}
-            >
+        <div className="footer__base">
+          <span>© {new Date().getFullYear()} Sara Abdelmeguid</span>
+          <span>
+            Developed by{" "}
+            <a href="https://alybadawy.com" target="_blank" rel="noopener noreferrer">
               Aly Badawy
             </a>
-          </div>
+          </span>
         </div>
       </div>
     </footer>

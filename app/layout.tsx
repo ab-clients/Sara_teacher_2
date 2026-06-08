@@ -1,23 +1,33 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Cormorant_Garamond, EB_Garamond, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "./components/ThemeProvider";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import ScrollRevealInit from "./components/ScrollRevealInit";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const ebGaramond = EB_Garamond({
+  variable: "--font-eb-garamond",
   subsets: ["latin"],
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
+});
+
+const hanken = Hanken_Grotesk({
+  variable: "--font-hanken",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
   title: "Sara Abdelmeguid",
-  description: "Freelance English Tutor • IGCSE Specialist • CELTA, TEFL",
+  description: "Freelance English Tutor · IGCSE Specialist · CELTA, TEFL. Student-centred lessons in confidence, communication and exam readiness.",
 };
 
 export default function RootLayout({
@@ -26,17 +36,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <main>
-            <Header />
-            {children}
-            <Footer />
-          </main>
-        </ThemeProvider>
+    <html lang="en" className={`${cormorant.variable} ${ebGaramond.variable} ${hanken.variable}`}>
+      <body>
+        <Header />
+        {children}
+        <Footer />
+        <ScrollRevealInit />
       </body>
     </html>
   );

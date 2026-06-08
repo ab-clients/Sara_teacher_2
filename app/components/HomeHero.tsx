@@ -1,70 +1,81 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
-import Button from "./Button";
 
-export default function HomeHero({
-  title,
-  subtitle,
-  bgImage,
-  aspect = "16/9",
-}: {
-  title: string;
-  subtitle?: string[];
-  bgImage?: string;
-  aspect?: string; // "width/height" like "16/9"
-}) {
-  const cssAspect = aspect.includes("/") ? aspect.replace("/", " / ") : aspect;
-
+export default function HomeHero() {
   return (
-    <section className="my-8 py-16 section-alt ">
-      <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-8 items-center">
-          <div className="space-y-6">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight">
-              {title}
-            </h1>
-            {subtitle &&
-              subtitle.map((line, index) => (
-                <p key={index} className="text-(--muted) max-w-xl">
-                  {line}
-                </p>
-              ))}
-
-            <div className="flex gap-4">
-              <Link href="/contact">
-                <Button className="cursor-pointer">Work with me</Button>
-              </Link>
-
-              <Link href="/cv">
-                <Button variant="ghost" className="cursor-pointer">
-                  View CV
-                </Button>
-              </Link>
-            </div>
+    <header style={{ paddingTop: "clamp(46px, 7vw, 96px)", paddingBottom: "clamp(40px, 6vw, 80px)" }}>
+      <div className="wrap hero-grid" style={{
+        display: "grid",
+        gridTemplateColumns: "1.15fr 0.85fr",
+        gap: "clamp(34px, 5vw, 80px)",
+        alignItems: "start",
+      }}>
+        <div>
+          <span className="kicker" data-reveal>
+            English Tutor · IGCSE Specialist · CELTA · TEFL
+          </span>
+          <h1 className="display" data-reveal data-delay="1" style={{ marginTop: "22px" }}>
+            English, taught with <em className="accent-ink">clarity</em>,<br />
+            confidence &amp; <em>craft</em>.
+          </h1>
+          <p className="lede" data-reveal data-delay="2" style={{ marginTop: "30px" }}>
+            I&rsquo;m Sara — an English tutor with 15+ years of international experience, designing student-centred lessons that build real-world fluency and genuine exam readiness.
+          </p>
+          <div data-reveal data-delay="3" style={{ marginTop: "30px", display: "flex", gap: "18px", flexWrap: "wrap", alignItems: "center", fontSize: "13px", letterSpacing: "0.04em", color: "var(--fg-faint)" }}>
+            <span>Based in Australia</span>
+            <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "var(--fg-faint)", display: "inline-block" }} />
+            <span>Open to global roles</span>
+            <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "var(--fg-faint)", display: "inline-block" }} />
+            <span>Remote worldwide</span>
           </div>
+          <div data-reveal data-delay="3" style={{ marginTop: "38px", display: "flex", gap: "14px", flexWrap: "wrap" }}>
+            <Link href="/contact" className="btn btn--solid">Work with me <span className="arr">→</span></Link>
+            <Link href="/cv" className="btn">View CV <span className="arr">→</span></Link>
+          </div>
+        </div>
 
-          <div className="w-full flex items-center justify-center">
-            <div
-              className="w-full rounded-xl overflow-hidden shadow-lg"
-              style={{ aspectRatio: cssAspect }}
-            >
-              {bgImage ? (
-                <Image
-                  src={bgImage}
-                  alt={title}
-                  className="w-full h-full object-cover block"
-                  width={640}
-                  height={360}
-                  priority
-                />
-              ) : (
-                <div className="w-full h-full bg-gradient-to-r from-purple-600 to-cyan-500" />
-              )}
-            </div>
+        <div className="hero-portrait" data-reveal data-delay="2" style={{
+          position: "relative",
+          aspectRatio: "4 / 5",
+          height: "clamp(360px, 50vw, 560px)",
+          marginLeft: "auto",
+          width: "100%",
+        }}>
+          <div className="ph" style={{ width: "100%", height: "100%", borderRadius: "2px" }}>
+            <Image
+              src="/images/hero-sara.jpg"
+              alt="Sara Abdelmeguid"
+              fill
+              style={{ objectFit: "cover", objectPosition: "50% 30%" }}
+              priority
+            />
+          </div>
+          <div style={{
+            position: "absolute",
+            left: "-14px",
+            bottom: "26px",
+            background: "var(--bg)",
+            border: "1px solid var(--line)",
+            padding: "11px 16px",
+            fontSize: "11px",
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
+            color: "var(--fg-soft)",
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+          }}>
+            <b style={{ color: "var(--accent)" }}>15+</b> Years Teaching
           </div>
         </div>
       </div>
-    </section>
+
+      <style>{`
+        @media (max-width: 900px) {
+          .hero-grid { grid-template-columns: 1fr !important; }
+          .hero-portrait { order: -1; height: clamp(320px, 80vw, 460px) !important; margin-bottom: 8px; }
+        }
+      `}</style>
+    </header>
   );
 }
