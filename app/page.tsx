@@ -1,22 +1,15 @@
 import HomeHero from "./components/HomeHero";
-import CTA from "./components/CTA";
-import HomeTeaching from "./components/HomeTeaching";
+import HomeMarquee from "./components/HomeMarquee";
 import { HomeAbout } from "./components/HomeAvout";
+import HomeTeaching from "./components/HomeTeaching";
+import CTA from "./components/CTA";
 
 export default function Home() {
   return (
     <>
-      <HomeHero
-        title={"Hi, I'm Sara Abdelmeguid"}
-        subtitle={[
-          "Freelance Teacher • Based in Australia • Open to global roles.",
-          "English language tutoring, curriculum design, and online lessons. Friendly, modern approach tailored to learners.",
-        ]}
-        bgImage="/images/hero-sara.jpg"
-      />
-
+      <HomeHero />
+      <HomeMarquee />
       <HomeAbout />
-
       <HomeTeaching />
       <CTA />
     </>

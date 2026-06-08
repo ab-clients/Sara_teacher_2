@@ -1,154 +1,92 @@
-import Header from "../../app/components/Header";
-import Footer from "../../app/components/Footer";
-import Button from "../../app/components/Button";
 import Link from "next/link";
-import {
-  FaExternalLinkAlt,
-  FaBookOpen,
-  FaChalkboardTeacher,
-} from "react-icons/fa";
+import PortfolioGrid from "./PortfolioGrid";
 
 export const metadata = {
   title: "Portfolio — Sara Abdelmeguid",
-  description:
-    "Teaching resources, sample lessons and projects by Sara Abdelmeguid — English tutor",
+  description: "Selected teaching work — IGCSE exam-prep frameworks, bespoke curriculum design, lesson resources and workshops by Sara Abdelmeguid.",
 };
 
-export default function PortfolioPage() {
-  const projects = [
-    {
-      title: "IGCSE Writing Booster",
-      desc: "A 6-week targeted program focusing on exam-writing technique and assessment practice.",
-      href: "/portfolio/igcse-writing",
-      tag: "Course",
-    },
-    {
-      title: "Online Speaking Workshops",
-      desc: "Interactive, small-group workshops to build speaking confidence and exam performance.",
-      href: "/portfolio/speaking-workshops",
-      tag: "Workshop",
-    },
-    {
-      title: "Custom Curriculum Sample",
-      desc: "Example curriculum and assessment materials designed for middle-school learners.",
-      href: "/portfolio/curriculum-sample",
-      tag: "Resources",
-    },
-  ];
+const process = [
+  { n: "i",   title: "Listen", body: "Understand the learner's goals, level and the curriculum they're working toward." },
+  { n: "ii",  title: "Design", body: "Build a tailored plan with clear objectives and the right materials for the job." },
+  { n: "iii", title: "Teach",  body: "Deliver communicative, practical lessons with targeted, constructive feedback." },
+  { n: "iv",  title: "Review", body: "Track progress, adapt the plan and keep momentum toward measurable results." },
+];
 
+export default function PortfolioPage() {
   return (
     <>
-      <section className="py-12">
-        <div className="container">
-          <div className="paper p-8 text-center">
-            <h1 className="text-3xl md:text-4xl font-extrabold">Portfolio</h1>
-            <p className="text-(--muted) mt-3 max-w-2xl mx-auto">
-              Teaching resources, sample lesson plans, workshops and projects
-              that showcase my approach to English teaching, exam preparation
-              and curriculum design. Click any item to view details or request a
-              custom program.
-            </p>
+      <style>{`
+        .pf-hero__grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: clamp(30px, 5vw, 70px); align-items: end; }
+        .pf-hero__note { font-size: 14px; color: var(--fg-faint); line-height: 1.6; border-left: 1px solid var(--line); padding-left: 20px; max-width: 34ch; }
+        .process { border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(4, 1fr); }
+        .process .step { padding: clamp(26px, 3vw, 40px) 24px clamp(26px, 3vw, 40px) 24px; border-right: 1px solid var(--line); }
+        .process .step:first-child { padding-left: 0; }
+        .process .step:last-child { border-right: 0; }
+        @media (max-width: 900px) {
+          .pf-hero__grid { grid-template-columns: 1fr !important; }
+          .process { grid-template-columns: 1fr 1fr !important; }
+          .process .step:nth-child(2n) { border-right: 0 !important; }
+        }
+        @media (max-width: 560px) {
+          .process { grid-template-columns: 1fr !important; }
+          .process .step { border-right: 0 !important; }
+        }
+      `}</style>
 
-            <div className="mt-6 flex justify-center gap-3">
-              <Link href="/contact">
-                <Button variant="primary">Contact for custom work</Button>
-              </Link>
-              <Link href="/cv">
-                <Button variant="ghost">View full CV</Button>
-              </Link>
-            </div>
+      {/* Hero */}
+      <header style={{ paddingTop: "clamp(40px, 6vw, 84px)" }}>
+        <div className="wrap pf-hero__grid">
+          <div>
+            <span className="kicker" data-reveal>Portfolio</span>
+            <h1 className="display" data-reveal data-delay="1" style={{ marginTop: "20px" }}>
+              Materials made to <em className="accent-ink">teach</em>.
+            </h1>
+            <p className="lede" data-reveal data-delay="2" style={{ marginTop: "26px" }}>
+              A selection of teaching work — exam-prep frameworks, bespoke curricula, lesson resources and workshops, all designed around measurable learner progress.
+            </p>
           </div>
+          <p className="pf-hero__note" data-reveal data-delay="2">
+            Each project here is a placeholder ready for a real screenshot or sample. Drop in lesson plans, worksheets, slide decks or student outcomes to bring it to life.
+          </p>
+        </div>
+      </header>
+
+      {/* Filter + Grid */}
+      <section className="section section--tight">
+        <div className="wrap">
+          <PortfolioGrid />
         </div>
       </section>
 
-      <section className="py-12">
-        <div className="container">
-          <h2 className="text-2xl font-semibold mb-6">Selected Projects</h2>
-
-          <div className="grid sm:grid-cols-3 gap-6">
-            {projects.map((p) => (
-              <article key={p.title} className="paper p-5 flex flex-col">
-                <div className="flex items-center justify-between">
-                  <div className="font-semibold text-lg">{p.title}</div>
-                  <div className="text-(--muted) text-sm">{p.tag}</div>
-                </div>
-
-                <p className="text-(--muted) mt-3 flex-1">{p.desc}</p>
-
-                <div className="mt-4 flex items-center justify-between">
-                  <Link
-                    href={p.href}
-                    className="inline-flex items-center gap-2 text-(--primary)"
-                  >
-                    View project <FaExternalLinkAlt aria-hidden />
-                  </Link>
-                  <span className="text-(--muted) text-sm">
-                    Sample materials available
-                  </span>
-                </div>
-              </article>
+      {/* Process strip */}
+      <section className="section section--tight">
+        <div className="wrap">
+          <div className="eyebrow-row">
+            <span className="idx" data-reveal>How the work gets made</span>
+          </div>
+          <div className="process" data-reveal>
+            {process.map(({ n, title, body }) => (
+              <div key={n} className="step">
+                <span style={{ fontSize: "12px", fontWeight: 600, letterSpacing: "0.2em", color: "var(--accent)" }}>{n}</span>
+                <h4 style={{ fontFamily: "var(--serif)", fontSize: "24px", fontWeight: 500, margin: "14px 0 10px" }}>{title}</h4>
+                <p style={{ fontSize: "14.5px", color: "var(--fg-soft)", margin: 0, lineHeight: 1.55 }}>{body}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-12 section-alt">
-        <div className="container">
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="paper p-4">
-              <FaChalkboardTeacher
-                className="text-2xl"
-                style={{ color: "var(--accent)" }}
-                aria-hidden
-              />
-              <h3 className="font-semibold mt-3">Workshops</h3>
-              <p className="text-(--muted) mt-2">
-                Public and private workshops for exam technique, speaking and
-                writing.
-              </p>
-            </div>
-
-            <div className="paper p-4">
-              <FaBookOpen
-                className="text-2xl"
-                style={{ color: "var(--primary)" }}
-                aria-hidden
-              />
-              <h3 className="font-semibold mt-3">Lesson Resources</h3>
-              <p className="text-(--muted) mt-2">
-                Downloadable lesson plans, assessment rubrics and sample
-                activities.
-              </p>
-            </div>
-
-            <div className="paper p-4">
-              <FaExternalLinkAlt
-                className="text-2xl"
-                style={{ color: "var(--primary)" }}
-                aria-hidden
-              />
-              <h3 className="font-semibold mt-3">Custom Curriculum</h3>
-              <p className="text-(--muted) mt-2">
-                Bespoke curriculum design for schools and tutoring programmes.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-12">
-        <div className="container paper p-6 text-center">
-          <h3 className="text-2xl font-semibold">Want to see more?</h3>
-          <p className="text-(--muted) mt-2">
-            I can share full samples, lesson plans and references on request.
-          </p>
-          <div className="mt-4 flex justify-center gap-3">
-            <Link href="/contact">
-              <Button variant="primary">Get in touch</Button>
-            </Link>
-            <Link href="/cv">
-              <Button variant="ghost">Download CV</Button>
-            </Link>
+      {/* CTA */}
+      <section className="section section--tight">
+        <div className="wrap" style={{ textAlign: "center" }}>
+          <span className="kicker" data-reveal style={{ justifyContent: "center" }}>Have a project in mind?</span>
+          <h2 className="display" data-reveal data-delay="1" style={{ marginTop: "22px", maxWidth: "18ch", marginInline: "auto" }}>
+            Let&rsquo;s design something that <em className="accent-ink">works</em>.
+          </h2>
+          <div data-reveal data-delay="2" style={{ marginTop: "36px", display: "flex", gap: "14px", justifyContent: "center", flexWrap: "wrap" }}>
+            <Link href="/contact" className="btn btn--solid">Start a conversation <span className="arr">→</span></Link>
+            <Link href="/cv" className="btn">View CV <span className="arr">→</span></Link>
           </div>
         </div>
       </section>

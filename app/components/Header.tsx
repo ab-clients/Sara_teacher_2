@@ -1,92 +1,77 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import ThemeToggle from "./ThemeToggle";
-import { FaGraduationCap, FaBars, FaTimes } from "react-icons/fa";
+import { usePathname } from "next/navigation";
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/cv", label: "CV" },
+  { href: "/portfolio", label: "Portfolio" },
+  { href: "/contact", label: "Contact" },
+];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <header className="py-6 relative">
-      <div className="container flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <Link
-            href="/"
-            className="text-xl font-semibold flex items-center gap-2"
-          >
-            <FaGraduationCap
-              className="text-2xl"
-              style={{ color: "var(--primary)" }}
-              aria-hidden
-            />
-            <span>Sara Abdelmeguid</span>
-          </Link>
+    <nav className="nav">
+      <div className="wrap nav__in">
+        <Link href="/" className="brand">
+          <span className="dot" />
+          <b>Sara Abdelmeguid</b>
+        </Link>
+
+        <div className="nav__links">
+          {links.map(({ href, label }) => (
+            <Link key={href} href={href} className={isActive(href) ? "is-active" : ""}>
+              {label}
+            </Link>
+          ))}
         </div>
 
-        <nav className="hidden md:flex gap-6 items-center text-sm text-(--muted)">
-          <Link href="/">Home</Link>
-          <Link href="/cv">CV</Link>
-          <Link href="/portfolio">Portfolio</Link>
-          <Link href="/contact">Contact</Link>
-          <ThemeToggle />
-        </nav>
-
-        {/* Mobile: Theme toggle + hamburger */}
-        <div className="md:hidden flex items-center gap-2">
-          <ThemeToggle />
+        <div className="nav__right">
+          <Link href="/contact" className="btn btn--sm">
+            Work with me
+          </Link>
           <button
+            className="nav-hamburger"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="p-2 rounded-md"
           >
             {open ? (
-              <FaTimes className="text-xl" />
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M4 4l12 12M16 4L4 16" />
+              </svg>
             ) : (
-              <FaBars className="text-xl" />
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M3 5h14M3 10h14M3 15h14" />
+              </svg>
             )}
           </button>
         </div>
       </div>
 
-      {/* Mobile menu panel */}
       {open && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="absolute inset-x-4 top-full mt-3 rounded-lg shadow-lg z-50"
-          style={{
-            backgroundColor: "var(--bg)",
-            border: "1px solid var(--paper-border)",
-          }}
-        >
-          <div className="p-4">
-            <nav className="flex flex-col gap-3">
-              <Link href="/" onClick={() => setOpen(false)} className="py-2">
-                Home
-              </Link>
-              <Link href="/cv" onClick={() => setOpen(false)} className="py-2">
-                CV
-              </Link>
+        <div className="nav-mobile" role="dialog" aria-modal="true">
+          <nav className="nav-mobile__inner">
+            {links.map(({ href, label }) => (
               <Link
-                href="/portfolio"
+                key={href}
+                href={href}
+                className={isActive(href) ? "is-active" : ""}
                 onClick={() => setOpen(false)}
-                className="py-2"
               >
-                Portfolio
+                {label}
               </Link>
-              <Link
-                href="/contact"
-                onClick={() => setOpen(false)}
-                className="py-2"
-              >
-                Contact
-              </Link>
-            </nav>
-          </div>
+            ))}
+          </nav>
         </div>
       )}
-    </header>
+    </nav>
   );
 }
