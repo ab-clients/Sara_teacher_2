@@ -34,46 +34,63 @@ export default function HomeHero() {
           </div>
         </div>
 
-        <div className="hero-portrait" data-reveal data-delay="2" style={{
-          position: "relative",
-          aspectRatio: "4 / 5",
-          height: "clamp(360px, 50vw, 560px)",
-          marginLeft: "auto",
-          width: "100%",
-        }}>
-          <div className="ph" style={{ width: "100%", height: "100%", borderRadius: "2px" }}>
-            <Image
-              src="/images/hero-sara.jpg"
-              alt="Sara Abdelmeguid"
-              fill
-              style={{ objectFit: "cover", objectPosition: "50% 30%" }}
-              priority
-            />
-          </div>
-          <div style={{
-            position: "absolute",
-            left: "-14px",
-            bottom: "26px",
-            background: "var(--bg)",
-            border: "1px solid var(--line)",
-            padding: "11px 16px",
-            fontSize: "11px",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            color: "var(--fg-soft)",
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
+        <div className="hero-portrait-wrap" style={{ paddingTop: "100px" }}>
+          <div className="hero-portrait" data-reveal data-delay="2" style={{
+            position: "relative",
+            aspectRatio: "982 / 792",
+            width: "100%",
+            marginLeft: "auto",
           }}>
-            <b style={{ color: "var(--accent)" }}>15+</b> Years Teaching
+            <div className="ph" style={{ width: "100%", height: "100%", borderRadius: "2px" }}>
+              {/* Large screen portrait */}
+              <Image
+                className="hero-img-lg"
+                src="/images/hero-sara-lg.png"
+                alt="Sara Abdelmeguid"
+                fill
+                style={{ objectFit: "contain" }}
+                priority
+              />
+              {/* Small screen landscape */}
+              <Image
+                className="hero-img-sm"
+                src="/images/hero-sara-sm.png"
+                alt="Sara Abdelmeguid"
+                fill
+                style={{ objectFit: "cover", objectPosition: "50% 50%" }}
+                priority
+              />
+            </div>
+            <div style={{
+              position: "absolute",
+              left: "-14px",
+              top: "-20px",
+              background: "var(--bg-3)",
+              boxShadow: "0 4px 16px rgba(0,0,0,0.35)",
+              border: "1px solid var(--line)",
+              padding: "11px 16px",
+              fontSize: "11px",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "var(--fg-soft)",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+            }}>
+              <b style={{ color: "var(--accent)" }}>15+</b> Years Teaching
+            </div>
           </div>
         </div>
       </div>
 
       <style>{`
+        .hero-img-sm { display: none; }
         @media (max-width: 900px) {
           .hero-grid { grid-template-columns: 1fr !important; }
-          .hero-portrait { order: -1; height: clamp(320px, 80vw, 460px) !important; margin-bottom: 8px; }
+          .hero-portrait-wrap { order: -1; padding-top: 0 !important; }
+          .hero-portrait { aspect-ratio: 16 / 7 !important; height: auto !important; margin-bottom: 8px; }
+          .hero-img-lg { display: none; }
+          .hero-img-sm { display: block; }
         }
       `}</style>
     </header>
