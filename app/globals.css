@@ -399,4 +399,5 @@ h3.display { font-size: clamp(26px, 3vw, 40px); line-height: 1.04; }
   .cols-2 { grid-template-columns: 1fr; }
   .nav__links { display: none; }
   .nav-hamburger { display: flex; align-items: center; }
+  .nav__right .btn { display: none; }
 }
